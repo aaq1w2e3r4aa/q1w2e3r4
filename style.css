@@ -1,0 +1,72 @@
+a
+{
+    color: #0000ff;
+}
+
+
+a:hover
+{
+    color: #0000ff;
+    text-decoration: none;
+}
+
+
+div, td
+{
+    font-family: ËÎÌå;
+    font-size: 12px;
+    line-height: 200%;
+    color: #000000;
+}
+
+
+body {
+    margin: 0 0 0 0 auto;
+
+}
+
+.maintab /*Í¨ÓÃÖ÷±í*/
+{
+    width: 100%;
+    border: 0px;
+    border-spacing: 0px;
+    margin:auto;
+}
+
+.subtab /*Í¨ÓÃ×Ó±í*/
+{
+    width: 100%;
+    border: 0px;
+    border-spacing: 0px;
+}
+
+
+a.submenua
+{
+    text-decoration: none;
+    color: #000000;
+}
+a.submenua:hover
+{
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.maindiv /*ÖÐ²¿²Ù×÷ÇøµÄÎ»ÖÃ¿ØÖÆ*/
+{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-right: auto;
+    margin-left: auto;
+    width: 100%;
+}
+
+.topdiv /*µ±Ç°Î»ÖÃËùÔÚµÄDIV*/
+{
+    margin-top: 0px;
+    margin-bottom: 20px;
+    margin-right: auto;
+    margin-left: auto;
+    width: 100%;
+}
+

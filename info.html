@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript">
+        window.onload=function () {
+            document.getElementById("sfzh").value = localStorage.getItem("sfzh");
+            document.getElementById("sf").value = localStorage.getItem("sf");
+            document.getElementById("fdy").value = localStorage.getItem("fdy");
+            var nowDate=new Date();
+            var month=nowDate.getMonth()+1;
+            var lxsjStr=month+"月"+nowDate.getDate()+"日"+nowDate.getHours()+"时"+nowDate.getMinutes()+"分";
+            document.getElementById("lxsj").value=lxsjStr;
+            localStorage.setItem("lxsj",lxsjStr);
+        }
+        function formatDate(date, format) {
+            if (!date) return;
+            if (!format) format = "yyyy-MM-dd";
+            switch(typeof date) {
+                case "string":
+                    date = new Date(date.replace(/-/, "/"));
+                    break;
+                case "number":
+                    date = new Date(date);
+                    break;
+            }
+            if (!date instanceof Date) return;
+            var dict = {
+                "yyyy": date.getFullYear(),
+                "M": date.getMonth() + 1,
+                "d": date.getDate(),
+                "H": date.getHours(),
+                "m": date.getMinutes(),
+                "s": date.getSeconds(),
+                "MM": ("" + (date.getMonth() + 101)).substr(1),
+                "dd": ("" + (date.getDate() + 100)).substr(1),
+                "HH": ("" + (date.getHours() + 100)).substr(1),
+                "mm": ("" + (date.getMinutes() + 100)).substr(1),
+                "ss": ("" + (date.getSeconds() + 100)).substr(1)
+            };
+            return format.replace(/(yyyy|MM?|dd?|HH?|ss?|mm?)/g, function() {
+                return dict[arguments[0]];
+            });
+        }
+
+        function saveInfo() {
+            localStorage.setItem("sfzh",document.getElementById("sfzh").value);
+            localStorage.setItem("sf",document.getElementById("sf").value);
+            localStorage.setItem("fdy",document.getElementById("fdy").value);
+            localStorage.setItem("fxsj",document.getElementById("fxsj").value);
+            var sqsjStr=formatDate(new Date(Date.parse(document.getElementById("sqsj").value.replace("T"," "))),"M月d日H时m分");
+            var qjstartStr=formatDate(new Date(Date.parse(document.getElementById("qjstart").value.replace("T"," "))),"M月d日H时m分");
+            var qjendStr=formatDate(new Date(Date.parse(document.getElementById("qjend").value.replace("T"," "))),"M月d日H时m分");
+
+            localStorage.setItem("sqsj",sqsjStr);
+            localStorage.setItem("qjstart",qjstartStr);
+            localStorage.setItem("qjend",qjendStr);
+            alert("已保存");
+
+        }
+
+        var image_name = localStorage.getItem("image_name");
+        var image = localStorage.getItem("image");
+
+        if(image_name && image){
+            var storageFile = new File([image], {"type":"text/plain"});
+            Object.defineProperty(storageFile,'name',{value:image_name});
+        }
+
+        function loadFile(file){
+            var fileReader = new FileReader();
+            fileReader.onload = function () {
+                var result = this.result;
+                try {
+                    localStorage.setItem("image", result);
+                    localStorage.setItem("image_name", file.name);
+                    document.getElementById("img").innerHTML='<img src="' + localStorage.getItem("image") + '" alt="" style="width:200px"/>';
+                }
+                catch (e) {
+                    console.log("Storage failed: " + e);
+                }
+            };
+
+            fileReader.readAsDataURL(file);
+
+        }
+
+
+    </script>
+</head>
+<body>
+    <div align="center">
+        <table>
+            <tr>
+                <td>身份证号</td>
+                <td><input type="text" id="sfzh"/><br/></td>
+            </tr>
+            <tr>
+                <td>身份</td>
+                <td><input type="text" id="sf"/><br/></td>
+            </tr>
+            <tr>
+                <td>辅导员</td>
+                <td><input type="text" id="fdy"/><br/></td>
+            </tr>
+            <tr>
+                <td>申请时间</td>
+                <td><input type="datetime-local" id="sqsj"/></td>
+            </tr>
+            <tr>
+                <td>请假起始时间</td>
+                <td><input type="datetime-local" id="qjstart" /><br/></td>
+            </tr>
+            <tr>
+                <td>请假结束时间</td>
+                <td><input type="datetime-local" id="qjend" /><br/></td>
+            </tr>
+            <tr>
+                <td>离校时间</td>
+                <td><input type="text" id="lxsj"/><br/></td>
+            </tr>
+            <tr>
+                <td>返校时间</td>
+                <td><input type="text" id="fxsj"/><br/></td>
+            </tr>
+            <tr>
+                <td>图片</td>
+                <td><input type="file" id="jobData" onchange="loadFile(this.files[0])"></td>
+
+            </tr>
+            <tr>
+                <td> <td><div id="img"></div></td></td>
+            </tr>
+            <tr>
+                <td><input id="image" value="保存" type="button" onclick="saveInfo()"></td>
+
+
+            </tr>
+        </table>
+    </div>
+
+</body>
+</html>
