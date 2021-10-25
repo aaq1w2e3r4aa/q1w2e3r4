@@ -32,14 +32,15 @@
 
 
 
-        function NowTime() {
+         function NowTime() {
             const time = new Date();
             const year = time.getFullYear();
             const month = time.getMonth() + 1;
             const day = time.getDate();
             const h = time.getHours();
             const m = time.getMinutes();
-            document.getElementById("showNowTime").innerHTML = day + "日" + h + "时" + m + "分";
+            const s=time.getSeconds();
+            document.getElementById("showNowTime").innerHTML = day + "日\t"+ h + "时" + m + "分"+s+"秒";
         }
 
 
