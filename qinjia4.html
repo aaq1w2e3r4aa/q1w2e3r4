@@ -16,6 +16,7 @@
             document.getElementById("fxsj").innerText = localStorage.getItem("fxsj");
             document.getElementById("img").src= localStorage.getItem("image");
             setInterval("NowTime()",1000);
+            setInterval("getSecurityCode()",1000);
 
         }
 
@@ -27,7 +28,14 @@
             const h = time.getHours();
             const m = time.getMinutes();
             const s=time.getSeconds();
-            document.getElementById("showNowTime").innerHTML = day + "日\t"+ h + "时" + m + "分"+s+"秒";
+            document.getElementById("sj0").innerHTML = day + "日"+ h + "时" + m + "分";
+        }
+        function getSecurityCode(){
+            const time = new Date();
+            var securityCode = (time.getHours()+1)*9;
+            document.getElementById("fwm").innerHTML = securityCode;
+            
+
         }
 
 
@@ -50,9 +58,11 @@
 
 <div>
     <strong><a href="index.html">主页</a> -&nbsp;学生管理 - 学生请假 出入校登记 </strong><span
-        class="auto-style1">本功能试运行，故障请截图反馈班长QQ群</span><br/>
+        class="auto-style1">进出校门，请向保安师傅出示、大声说出防伪码：</span><br/>
+        <br><span id="fwm" style="color:Red;background-color:White;font-size: 150px;line-height:100%;"></span><br>
 
-    当前：<span id="showNowTime" style="color:Red;background-color:White;font-size: xx-large"></span>
+    当前：<span id="sj0" ></span>
+    <!-- style="color:Red;background-color:White;font-size: xx-large" -->
 
     <br/>
     头像： <img id="img" alt="" style="width:200px"/>
