@@ -31,8 +31,9 @@
         }
         function getSecurityCode(){
             const time = new Date();
-            var securityCode = (time.getHours()+1)*0;
+            var securityCode = (time.getHours()+1)*(time.getDate()-1);
             document.getElementById("fwm").innerHTML = securityCode;
+            
 
         }
 
